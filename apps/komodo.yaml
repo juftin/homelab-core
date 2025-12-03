@@ -43,7 +43,7 @@ services:
             <<: *komodo-env
         volumes:
             - ${DOCKER_DIRECTORY}/appdata/komodo/core/backups:/backups
-            - ${DOCKER_DIRECTORY}/apps/komodo/core.config.toml:/config/config.toml
+            - ${DOCKER_DIRECTORY}/komodo.toml:/config/config.toml
         networks:
             internal:
             traefik:

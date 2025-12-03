@@ -1,0 +1,27 @@
+[[repo]]
+name = "homelab"
+[repo.config]
+server = "homelab"
+repo = "juftin/homelab-core"
+
+[[stack]]
+name = "homelab"
+[stack.config]
+server = "homelab"
+poll_for_updates = true
+auto_update = true
+linked_repo = "homelab"
+file_paths = ["docker-compose.apps.yaml"]
+
+[secrets]
+# DOMAIN NAME SETUP
+DOMAIN_NAME = "localhost"
+# ENVIRONMENT SETUP
+TZ = "America/Denver"
+PUID = "501"
+PGID = "20"
+# DIRECTORY SETUP
+DOCKER_DIRECTORY="/Users/juftin/test/homelab"
+# NETWORKING SETUP
+PHYSICAL_SERVER_IP = "192.168.1.6"
+PHYSICAL_SERVER_NETWORK = "192.168.1.0/24"
