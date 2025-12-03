@@ -1,0 +1,26 @@
+########################################################
+# homepage HOMEPAGE
+########################################################
+
+services:
+    homepage:
+        container_name: homepage
+        image: ghcr.io/gethomepage/homepage:v1.7.0
+        volumes:
+            - ${DOCKER_DIRECTORY}/appdata/homepage:/app/config
+        environment:
+            PUID: ${PUID}
+            PGID: ${PGID}
+            HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_DOMAIN:-homepage}.${DOMAIN_NAME}
+        security_opt:
+            - no-new-privileges:true
+        restart: ${UNIVERSAL_RESTART_POLICY:-unless-stopped}
+        networks:
+            traefik:
+        labels:
+            traefik.enable: true
+            traefik.http.routers.homepage-rtr.rule: Host(`${HOMEPAGE_DOMAIN:-homepage}.${DOMAIN_NAME}`)
+            traefik.http.routers.homepage-rtr.entrypoints: web
+            traefik.http.routers.homepage-rtr.service: homepage-svc
+            traefik.http.services.homepage-svc.loadbalancer.server.port: 3000
+            traefik.http.routers.homepage-rtr.middlewares: chain-rate-limit@file
