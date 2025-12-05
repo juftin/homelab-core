@@ -1,0 +1,21 @@
+[[repo]]
+name = "homelab"
+
+[repo.config]
+server = "homelab"
+repo = "juftin/homelab-core"
+
+[[stack]]
+name = "homelab"
+
+[stack.config]
+server = "homelab"
+poll_for_updates = true
+auto_update = true
+linked_repo = "homelab"
+file_paths = ["docker-compose.apps.yaml"]
+pre_deploy.command = """
+mise trust .mise.toml
+mise set SOPS_AGE_KEY_FILE=/app/mise/.age/key.txt
+mise run decrypt
+"""

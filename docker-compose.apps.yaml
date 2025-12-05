@@ -1,15 +1,13 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-go/refs/heads/main/schema/compose-spec.json
 
 ################################################################################
-# HOMELAB-CORE
+# HOMELAB
 ################################################################################
 
-name: homelab-core
+name: homelab
 
 include:
-    - apps/traefik/docker-compose.yaml # Traefik (Reverse Proxy)
-    - apps/komodo/docker-compose.yaml # Komodo (Docker Management Platform)
-    - apps/socket-proxy.yaml # Docker Socket Proxy (Security)
+    - apps/homepage.yaml
 
 ################################################################################
 # NETWORK CONFIGURATION
@@ -17,17 +15,11 @@ include:
 
 networks:
     traefik:
-        driver: bridge
-        ipam:
-            config:
-                - subnet: 192.168.90.0/24
+        external: true
+        name: homelab-core_traefik
     docker:
-        driver: bridge
-        ipam:
-            config:
-                - subnet: 192.168.91.0/24
+        external: true
+        name: homelab-core_docker
     internal:
-        driver: bridge
-        ipam:
-            config:
-                - subnet: 192.168.92.0/24
+        external: true
+        name: homelab-core_internal
