@@ -26,3 +26,14 @@ run = "sops decrypt '{{vars.ENCRYPTED_FILE}}' --output '{{vars.DECRYPTED_FILE}}'
 [tasks.encrypt]
 description = "Encrypt secrets file(s)"
 run = "sops encrypt '{{vars.DECRYPTED_FILE}}' --output '{{vars.ENCRYPTED_FILE}}' --input-type dotenv --output-type yaml"
+
+[tasks.deploy]
+description = "Deploy core application stack"
+run = [
+  "docker compose --file \"{{config_root}}/docker-compose.yaml\" pull",
+  "docker compose --file \"{{config_root}}/docker-compose.yaml\" up -d"
+]
+
+[tasks.destroy]
+description = "Destroy core application stack"
+run = "docker compose --file \"{{config_root}}/docker-compose.yaml\" down"
