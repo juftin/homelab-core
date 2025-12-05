@@ -7,19 +7,19 @@
 name: homelab
 
 include:
-  - apps/homepage.yaml
+    - apps/homepage.yaml
 
 ################################################################################
 # NETWORK CONFIGURATION
 ################################################################################
 
 networks:
-  traefik:
-    external: true
-    name: homelab-core_traefik
-  docker:
-    external: true
-    name: homelab-core_docker
-  internal:
-    external: true
-    name: homelab-core_internal
+    traefik:
+        external: true
+        name: homelab-core_traefik
+    docker:
+        external: true
+        name: homelab-core_docker
+    internal:
+        external: true
+        name: homelab-core_internal

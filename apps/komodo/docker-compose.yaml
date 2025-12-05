@@ -43,7 +43,9 @@ services:
             <<: *komodo-env
         volumes:
             - ${DOCKER_DIRECTORY}/appdata/komodo/core/backups:/backups
-            - ${DOCKER_DIRECTORY}/komodo.toml:/config/config.toml
+            - ${DOCKER_DIRECTORY}/apps/komodo/komodo.toml:/config/config.toml
+            - ${DOCKER_DIRECTORY}/apps/komodo/entrypoint.sh:/app/mise/entrypoint.sh:ro
+        entrypoint: /app/mise/entrypoint.sh
         networks:
             internal:
             traefik:

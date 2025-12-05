@@ -8,7 +8,7 @@ name: homelab-core
 
 include:
     - apps/traefik/docker-compose.yaml # Traefik (Reverse Proxy)
-    - apps/komodo.yaml # Komodo (Docker Management Platform)
+    - apps/komodo/docker-compose.yaml # Komodo (Docker Management Platform)
     - apps/socket-proxy.yaml # Docker Socket Proxy (Security)
 
 ################################################################################

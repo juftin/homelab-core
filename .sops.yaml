@@ -1,6 +1,6 @@
 creation_rules:
-  - age:
-      - age1xvg39edqpcucv2p887s04urhd9ayw4gv8wyc3l3qm6pdmnlvrfsqqjwmfa
+    - age:
+          - age1hcwnw2gjsyjnygk0g3sszgy629e87vv7hqvpgdec8xdjhpl423hqf364n3
 stores:
-  yaml:
-    indent: 2
+    yaml:
+        indent: 2
