@@ -65,6 +65,9 @@ services:
         volumes:
             - /proc:/proc
             - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
+            - ${DOCKER_DIRECTORY}/apps/komodo/entrypoint.sh:/app/mise/entrypoint.sh:ro
+        entrypoint: /app/mise/entrypoint.sh
+        command: periphery
         networks:
             internal:
             docker:

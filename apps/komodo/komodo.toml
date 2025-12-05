@@ -14,3 +14,6 @@ poll_for_updates = true
 auto_update = true
 linked_repo = "homelab"
 file_paths = ["docker-compose.apps.yaml"]
+pre_deploy.command = """
+mise run decrypt
+"""

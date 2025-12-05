@@ -9,6 +9,9 @@ BIN_DIR="${ROOT_DIR}/bin"
 MISE_VERSION="v2025.12.0"
 MISE_BINARY="${BIN_DIR}/mise"
 
+# Add BIN_DIR to PATH
+export PATH="${BIN_DIR}:${PATH}"
+
 function install_mise() {
   echo "Installing MISE..."
   # Install MISE via official install script
@@ -18,9 +21,8 @@ function install_mise() {
     MISE_INSTALL_HELP="0" \
     MISE_QUIET="1" \
     sh
-  # Add MISE to PATH
+  # Post-Installation Verification
   echo "MISE installed at ${MISE_BINARY}"
-  export PATH="${BIN_DIR}:${PATH}"
   mise --version
 }
 
@@ -30,8 +32,4 @@ if ! command -v mise &> /dev/null; then
 fi
 
 # Execute Passed Commands
-if [ ${#} -eq 0 ]; then
-  exec core
-else
-  exec "${@}"
-fi
+exec "${@}"
