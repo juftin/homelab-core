@@ -16,5 +16,6 @@ linked_repo = "homelab"
 file_paths = ["docker-compose.apps.yaml"]
 pre_deploy.command = """
 mise trust .mise.toml
+mise set SOPS_AGE_KEY_FILE=/app/mise/.age/key.txt
 mise run decrypt
 """

@@ -15,7 +15,6 @@ x-comodo-env: &komodo-env
     KOMODO_LOCAL_AUTH: true
     KOMODO_INIT_ADMIN_USERNAME: ${KOMODO_ADMIN_USERNAME:-admin}
     KOMODO_INIT_ADMIN_PASSWORD: ${KOMODO_ADMIN_PASSWORD:-password}
-
 services:
     komodo-mongo:
         container_name: komodo-mongo
