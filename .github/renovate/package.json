@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json.schemastore.org/package",
+    "name": "homelab",
+    "version": "2.0.0",
+    "devDependencies": {
+        "renovate": "^37.440.7",
+        "re2": "^1.22.3"
+    }
+}

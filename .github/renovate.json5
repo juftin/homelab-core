@@ -1,0 +1,91 @@
+{
+    $schema: "https://docs.renovatebot.com/renovate-schema.json",
+    extends: [
+        "config:recommended",
+        "docker:enableMajor",
+        "helpers:pinGitHubActionDigests",
+        ":automergeBranch",
+        ":dependencyDashboard",
+        ":disableRateLimiting",
+        ":semanticCommits",
+    ],
+    dependencyDashboard: true,
+    dependencyDashboardTitle: "Renovate Dashboard 🤖",
+    schedule: ["every weekend"],
+    ignorePaths: [],
+    "docker-compose": {
+        fileMatch: ["^apps/.*\\.ya?ml$"],
+    },
+    packageRules: [
+        {
+            description: "Auto-merge GitHub Actions",
+            matchManagers: ["github-actions"],
+            automerge: true,
+            automergeType: "branch",
+            matchUpdateTypes: ["minor", "patch", "digest"],
+            minimumReleaseAge: "3 days",
+            ignoreTests: true,
+        },
+        {
+            matchUpdateTypes: ["major"],
+            semanticCommitType: "💥 ",
+            commitMessageExtra: "( {{currentVersion}} → {{newVersion}} )",
+        },
+        {
+            matchUpdateTypes: ["minor"],
+            semanticCommitType: "✨ ",
+            commitMessageExtra: "( {{currentVersion}} → {{newVersion}} )",
+        },
+        {
+            matchUpdateTypes: ["patch"],
+            semanticCommitType: "🐛 ",
+            commitMessageExtra: "( {{currentVersion}} → {{newVersion}} )",
+        },
+        {
+            matchUpdateTypes: ["digest"],
+            semanticCommitType: "📌 ",
+            commitMessageExtra: "( {{currentDigestShort}} → {{newDigestShort}} )",
+        },
+        {
+            matchDatasources: ["docker"],
+            semanticCommitScope: "container",
+            commitMessageTopic: "image {{depName}}",
+        },
+        {
+            matchManagers: ["github-actions"],
+            semanticCommitType: "👷 ",
+            semanticCommitScope: "github-action",
+            commitMessageTopic: "action {{depName}}",
+        },
+        {
+            matchDatasources: ["github-releases"],
+            semanticCommitScope: "github-release",
+            commitMessageTopic: "release {{depName}}",
+        },
+        {
+            matchUpdateTypes: ["major"],
+            labels: ["type/major"],
+        },
+        {
+            matchUpdateTypes: ["minor"],
+            labels: ["type/minor"],
+        },
+        {
+            matchUpdateTypes: ["patch"],
+            labels: ["type/patch"],
+        },
+        {
+            matchDatasources: ["docker"],
+            addLabels: ["renovate/container"],
+        },
+        {
+            matchManagers: ["github-actions"],
+            addLabels: ["renovate/github-action"],
+        },
+        {
+            matchDatasources: ["github-releases"],
+            addLabels: ["renovate/github-release"],
+        },
+    ],
+    customManagers: [],
+}
