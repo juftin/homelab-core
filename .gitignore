@@ -5,4 +5,4 @@ appdata/
 .age/key.txt
 bin/
 .env
-!secrets.env.yaml
+!.env.yaml

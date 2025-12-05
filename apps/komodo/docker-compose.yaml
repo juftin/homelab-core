@@ -44,8 +44,6 @@ services:
         volumes:
             - ${DOCKER_DIRECTORY}/appdata/komodo/core/backups:/backups
             - ${DOCKER_DIRECTORY}/apps/komodo/komodo.toml:/config/config.toml
-            - ${DOCKER_DIRECTORY}/apps/komodo/entrypoint.sh:/app/mise/entrypoint.sh:ro
-        entrypoint: /app/mise/entrypoint.sh
         networks:
             internal:
             traefik:
@@ -66,6 +64,7 @@ services:
             - /proc:/proc
             - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
             - ${DOCKER_DIRECTORY}/apps/komodo/entrypoint.sh:/app/mise/entrypoint.sh:ro
+            - ${DOCKER_DIRECTORY}/.age/key.txt:/app/mise/.age/key.txt:ro
         entrypoint: /app/mise/entrypoint.sh
         command: periphery
         networks:
@@ -74,5 +73,6 @@ services:
         environment:
             <<: *komodo-env
             DOCKER_HOST: tcp://socket-proxy:2375
+            SOPS_AGE_KEY_FILE: /app/mise/.age/key.txt
         labels:
             komodo.skip: true

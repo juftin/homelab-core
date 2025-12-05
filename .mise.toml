@@ -8,12 +8,13 @@ age = "1.2.1"
 SOPS_AGE_KEY_FILE = "{{config_root}}/.age/key.txt"
 
 [vars]
-ENCRYPTED_FILE = "{{config_root}}/secrets.env.yaml"
+ENCRYPTED_FILE = "{{config_root}}/.env.yaml"
 DECRYPTED_FILE = "{{config_root}}/.env"
 
 [tasks.keygen]
 description = "Generate age keypair for secrets encryption"
 run = [
+  "mkdir -p $(dirname ${SOPS_AGE_KEY_FILE})",
   "age-keygen -o ${SOPS_AGE_KEY_FILE}",
   "chmod 600 ${SOPS_AGE_KEY_FILE}"
 ]

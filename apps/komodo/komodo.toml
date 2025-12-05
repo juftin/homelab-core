@@ -15,5 +15,6 @@ auto_update = true
 linked_repo = "homelab"
 file_paths = ["docker-compose.apps.yaml"]
 pre_deploy.command = """
+mise trust .mise.toml
 mise run decrypt
 """
