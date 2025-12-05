@@ -2,3 +2,6 @@
 .env*
 secrets/
 appdata/
+.age/key.txt
+bin/
+secrets.env
